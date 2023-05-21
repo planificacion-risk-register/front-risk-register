@@ -1,5 +1,42 @@
 .table-wrapper-scroll-y {
-    max-height: 400px; /* Ajusta la altura máxima del contenedor según tus necesidades */
-    overflow-y: auto; /* Habilita el desplazamiento vertical */
-  }
-  
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.risk-block {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.risk-form {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.return-link {
+  margin-left: 90%;
+  font-size: 20px;
+}
+
+.risk-1 {
+  background-color: rgb(75, 164, 75);
+}
+
+.risk-2 {
+  background-color: rgb(12, 122, 69);
+}
+
+.risk-3{
+  background-color: rgba(235, 232, 54, 0.981);
+}
+
+.risk-4 {
+  background-color: rgb(222, 159, 59);
+}
+
+.risk-5{
+  background-color: rgb(228, 42, 42);
+}
