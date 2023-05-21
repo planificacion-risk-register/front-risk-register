@@ -1,0 +1,5 @@
+.table-wrapper-scroll-y {
+    max-height: 400px; /* Ajusta la altura máxima del contenedor según tus necesidades */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+  }
+  

@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import RoutesPlan from './routes/RoutesPlan';
