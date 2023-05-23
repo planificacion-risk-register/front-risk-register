@@ -4,6 +4,7 @@ import {Login} from '../components/login/Login'
 import App from '../App';
 import { AddRisk } from '../components/riskRegister/AddRegister';
 import Matrix from '../components/Matrix/Matrix';
+import { CreateUser } from '../components/login/CreateUser';
 
 export default function RoutesPlan() {
   return (
@@ -13,6 +14,7 @@ export default function RoutesPlan() {
             <Route path='/app' element={<App></App>}></Route>
             <Route path='/addRisk' element={<AddRisk></AddRisk>}></Route>
             <Route path='/matrix' element={<Matrix></Matrix>}></Route>
+            <Route path='/createUser' element={<CreateUser></CreateUser>}></Route>
         </Routes>
     </Router>
   )
