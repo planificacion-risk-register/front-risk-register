@@ -1,0 +1,31 @@
+html, body {
+    height: 100%;
+}
+
+.grapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    height: 100%;
+
+}
+
+.logo{
+    height: 130px;
+    margin-bottom: 10px;
+}
+
+.body{
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+#fondo{
+    margin-top: 30%;
+}
+
+.logo{
+    border-radius: 50px;
+}
