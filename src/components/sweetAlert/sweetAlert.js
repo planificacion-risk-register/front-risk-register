@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import swal from "sweetalert";
-import { savePlan } from "../../services/RiskService";
+import { saveTask } from "../../services/TaskService";
+import { updateTask } from "../../services/TaskService";
 import { saveRisks } from "../../services/RiskService";
 import { updateRisks } from "../../services/RiskService";
 import { deleteRisks } from "../../services/RiskService";
@@ -14,23 +15,30 @@ const SweetAlertC = ({
   setChanges,
   deletedList,
 }) => {
-  const today = new Date().toISOString().substr(0, 10);
-  const totalPoints = calculateTotalPoints();
-
   async function handleConfirm() {
-    //  planRegister.lastUpdate=today
+    const today = new Date().toISOString().substr(0, 10);
+    const totalPoints = calculateTotalPoints();
+    planRegister.total_points = totalPoints;
+    planRegister.last_update = today;
     setChanges(false);
     if (typeOfAction === "add") {
-      // planRegister.riskCount = (risksList.length + 1);
-      await savePlan(planRegister);
+
+      planRegister.risk_count = risksList.length + 1;
+
+      await saveTask(planRegister);
+
       await saveRisks(risksList);
+
     } else {
+
       if (deletedList.length > 0) {
         console.log("voy a eliminar");
         await deleteRisks(deletedList);
       }
-      //planRegister.riskCount = (risksList.length + 1)-deletedList.length;
-      //await planUpdate(planRegister);
+      planRegister.risk_count = risksList.length + 1 - deletedList.length;
+      
+      await updateTask(planRegister);
+
       await updateRisks(risksList);
     }
 
