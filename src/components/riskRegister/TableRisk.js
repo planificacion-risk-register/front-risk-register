@@ -52,7 +52,7 @@ const TableRisk = ({
     id: propietario.id,
     label: propietario.nombre,
   }));
-
+console.log(riskList)
   const addRow = () => {
     const lastRisk = riskList[riskList.length - 1];
     if (
@@ -71,7 +71,7 @@ const TableRisk = ({
             ? riskList[riskList.length - 1].id_risk + 1
             : 1,
           risk_description: "",
-          id_plan: lastRisk ? lastRisk.idPlan : 0, 
+          id_plan: lastRisk ? lastRisk.id_plan : 0, 
           impact_description: "",
           impact: "",
           probability: "",
@@ -120,8 +120,7 @@ const TableRisk = ({
     if (riskList.length > 1) {
       if (newT) {
       } else {
-        const newRisk = { id_risk: id };
-        setDeleted([...deletedRisks, newRisk]);
+        setDeleted([...deletedRisks, id]);
       }
       const updatedArrayRisk = riskList.filter((risk) => risk.id_risk !== id);
       setRiskList(updatedArrayRisk);
@@ -175,7 +174,7 @@ console.log(deletedRisks)
                     onChange={(e) => handleRiskChange(e, data.id_risk)}
                   />
                 </td>
-                <td className={`risk-${data.impact}`} >
+                <td className={`risk-${data.impact}`} style={{width: "190px"}}>
                   <Select
                     options={impact}
                     isSearchable={false}
@@ -194,7 +193,7 @@ console.log(deletedRisks)
                     }
                   />
                 </td>
-                <td className={`risk-${data.probability}`}>
+                <td className={`risk-${data.probability}`} style={{width: "200px"}}>
                   <Select
                     options={probability}
                     isSearchable={false}
@@ -213,7 +212,7 @@ console.log(deletedRisks)
                     }
                   />
                 </td>
-                <td>
+                <td style={{width: "200px"}}>
                   <Select
                     options={ownersName}
                     isSearchable={true}
@@ -225,7 +224,7 @@ console.log(deletedRisks)
                     onChange={(selectedOption) =>
                       handleSelectedChange(
                         selectedOption.id,
-                        "owner_name",
+                        "owner",
                         data.id_risk
                       )
                     }
@@ -240,7 +239,7 @@ console.log(deletedRisks)
                     onChange={(e) => handleRiskChange(e, data.id_risk)}
                   />
                 </td>
-                <td className={`risk-${data.priority}`}>
+                <td className={`risk-${data.priority}`} style={{width: "70px"}}>
                   <Select
                     options={priority}
                     isSearchable={false}
@@ -265,10 +264,10 @@ console.log(deletedRisks)
                     disabled
                     name="point"
                     value={data.probability*data.impact}
-                    style={{width:"55px"}}
+                    style={{width:"50px"}}
                   />
                 </td>
-                <td>
+                <td >
                   <button
                     className="btn"
                     onClick={() => {

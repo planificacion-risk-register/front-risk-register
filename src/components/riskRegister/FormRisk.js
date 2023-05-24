@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Select from "react-select";
 
 const FormRisk = ({ task, setTask, setChanges, projectsName }) => {
+  console.log(task)
   const handleOnChange = (e) => {
     setChanges(true);
     const { name, value } = e.target;
@@ -50,6 +51,7 @@ const FormRisk = ({ task, setTask, setChanges, projectsName }) => {
                 <Form.Control
                   type="text"
                   name="task_name"
+                  defaultValue={task.task_name}
                   onChange={handleOnChange}
                 />
               </Form.Group>

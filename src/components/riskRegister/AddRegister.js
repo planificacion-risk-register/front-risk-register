@@ -9,15 +9,18 @@ import SweetAlertC from "../sweetAlert/sweetAlert";
 import TableRisk from "./TableRisk";
 import FormRisk from "./FormRisk";
 import { getRisksByIdPlan } from "../../services/RiskService";
+import { getPlanById } from "../../services/TaskService";
 
 
 export function AddRisk() {
-  //const { id } = useParams();
-  const id = 3;
+  const { id } = useParams();
   useEffect(() => {
     if (id != "add") {
       getRisksByIdPlan(id).then((risks) => {
         setRiskList(risks);
+      });
+      getPlanById(id).then((plan) => {
+        setPlan(plan);
       });
       console.log("Hola ",riskList)
     }
@@ -27,7 +30,7 @@ export function AddRisk() {
   const [changesMade, setChanges] = useState(false);
   const [showMessage, setMessage] = useState("changes pending to be save...");
   const [projectsName, setProjects] = useState([]);
-  const [deletedRisks, setDeleted] = useState([{id_risk: 0}]);
+  const [deletedRisks, setDeleted] = useState([]);
   const [isPlanSaved, setSaved] = useState(false);
   const [planRegister, setPlan] = useState({
     id_task: 0,
@@ -36,11 +39,11 @@ export function AddRisk() {
   });
 
   const projectsName2 = [
-    { id: "1", label: "Project Hanks" },
-    { id: "2", label: "Kodiak" },
-    { id: "3", label: "Code Talkers" },
-    { id: "4", label: "Project Blue Book" },
-    { id: "5", label: "Project 404" },
+    { id: 1, label: "Project Hanks" },
+    { id: 2, label: "Kodiak" },
+    { id: 3, label: "Code Talkers" },
+    { id: 4, label: "Project Blue Book" },
+    { id: 5, label: "Project 404" },
   ];
 
   const saveInformation = () => {
@@ -75,7 +78,7 @@ export function AddRisk() {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        console.log("Volví a página principal");
+        window.location.href = "/";
       } else {
         console.log("Sigo en la misma página");
       }

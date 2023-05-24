@@ -23,8 +23,8 @@ const impact = [
 
 const Matrix = () => {
   const [risk, setRisk] = useState([]);
-  // const { id } = useParams();
-  const id = 3;
+  const { id } = useParams();
+  
   useEffect(() => {
     getRisksByIdPlan(id).then((risks) => {
       setRisk(risks);

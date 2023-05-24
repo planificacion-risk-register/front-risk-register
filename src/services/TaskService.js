@@ -1,32 +1,30 @@
 import axios from 'axios';
 
-const url = "https://localhost:7287/api/Risk/";
+const url = "https://localhost:7287/api/Task/";
 
-export async function saveRisks(riskList) {
+export async function saveTask(plan) {
     return await axios
-        .post(url+"create", riskList)
+        .post(url, plan)
         .then((response) => console.log(response))
         .catch((error) => {
             console.error("Error al guardar!", error);
         });
 }
 
-export async function updateRisks(riskList) {
+export async function updateTask(plan) {
     return await axios
-        .post(url+"update", riskList)
+        .put(url, plan)
         .then((response) => console.log(response))
         .catch((error) => {
             console.error("Error al guardar!", error);
         });
 }
 
-export function getRisksByIdPlan(id) {
+export function getPlans() {
     const options = {
         method: "GET",
         withCredentials: false,
-        url:
-            url+"byIdPlan/"+
-            id,
+        url:url
     };
     return axios
         .request(options)
@@ -39,22 +37,11 @@ export function getRisksByIdPlan(id) {
         });
 }
 
-export async function deleteRisks(idList) {
-    return await axios
-        .post(url+"delete", idList)
-        .then((response) => console.log(response))
-        .catch((error) => {
-            console.error("Error al guardar!", error);
-        });
-}
-
-export function deleteAll(id) {
+export function getPlanById(id) {
     const options = {
         method: "GET",
         withCredentials: false,
-        url:
-            url+
-            id,
+        url:url+id
     };
     return axios
         .request(options)
@@ -65,4 +52,24 @@ export function deleteAll(id) {
         .catch(function (error) {
             console.error(error);
         });
+}
+
+export function deletePlan(id) {
+    const options = {
+        method: "DELETE",
+        withCredentials: false,
+        url:
+            url +id
+    };
+    console.log(options);
+    return axios
+        .request(options)
+        .then((response) => {
+            const res = response.data;
+            return res;
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+
 }
