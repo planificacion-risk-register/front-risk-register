@@ -13,6 +13,8 @@ export async function newLogin(login) {
         })
         .catch((error) => {
             console.error("Error al guardar!", error);
+            const response = error
+            return response
         });
 }
 
@@ -26,5 +28,7 @@ export async function loginGoogle(login) {
         })
         .catch((error) => {
             console.error("Error al guardar!", error);
+            const response = error
+            return response
         });
 }

@@ -6,12 +6,12 @@ import costa from '../../statics/img/costa-rica.jpg'
 import logo from '../../statics/img/slogan1.png'
 import { newLogin, loginGoogle } from '../../services/LoginService'
 import { saveUser } from '../../services/UserService'
+import { toastSucces, toastInfo, toastError, toastWarning } from '../utils/ToastNotify'
 
 export const Login = () => {
 
     const clientID = "481489586127-t28bb9ijuf6tdeet2kv93q4nb4bpvuel.apps.googleusercontent.com"
     const [user, setUser] = useState({});
-    const [newUserLogin, newSetuserLogin] = useState({})
     const [login, setLogin] = useState(LoginModel())
 
     const onSuccess = async (response) => {
@@ -25,32 +25,25 @@ export const Login = () => {
             password: "chocolate"
         }
 
-        newSetuserLogin(userConst)
         const dato = await response.profileObj
         setUser(dato);
         document.getElementsByClassName("btn").hidden = true;
-        console.log("data:", user? user.name: "nada")
-        console.log("new user: ", newUserLogin)
-
 
         await saveUser(userConst).then((data) => {
-            const res = data
-            console.log("data de crear usuario: ", res)
+  
             //si ya existe el usuario creado
-            if(res.msg==="Usuario guardado con éxito"){
+            if(data.msg==="Usuario guardado con éxito"){
                 console.log("usuario creado succes")
+                toastSucces(data.msg+', favor iniciar sesión otra vez')
                 localStorage.setItem("email", userConst.email)
-            }else if(res.response.status===400){
+            }else if(data.response.status===400){
                 result = true
                 console.log("ya existe el usuario: ", result)
-            
-            }else{
-                console.log("usuario creado")
-                //localStorage.setItem("email", userConst.email)
             }
-
         })
+        
         if(result){
+            //Para poder loguear con una cuenta google ya creada
             const google = {
                 email: await response.profileObj.email,
                 password: userConst.password
@@ -58,6 +51,7 @@ export const Login = () => {
             await loginGoogle(google).then((data)=>{
                 localStorage.setItem("token", data.token)
                 localStorage.setItem("email", google.email)
+                toastInfo(`Sesión iniciada en ${google.email}`)
             })
         }
         
@@ -81,10 +75,27 @@ export const Login = () => {
         const value = e.target.value
         setLogin({ ...login, [name]: value })
     }
-
+ 
     const handleLogin = () => {
+        const email_expresion = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+        if(login.email === ''|| login.password === ''){
+            toastWarning('Todos los campos son obligatorios')
+            return
+        }
+        if(!email_expresion.test(login.email)){
+            toastError('El email no es válido')
+            return
+        }
         newLogin(login).then((data) =>{
-            console.log("desde login",data.token)
+            if(data.response.status===400){
+                toastError(data.response.data.error)
+            }else {
+                console.log("desde login",data.token)
+                localStorage.setItem("token", data.token)
+                localStorage.setItem("email", login.email)
+                toastInfo(`Sesión iniciada en ${login.email}`)
+            }
+
         })
     }
 
@@ -98,13 +109,7 @@ export const Login = () => {
                                 <div className="card" style={{ borderRadius: '1rem' }}>
                                     <div className="row g-0">
                                         <div className="col-md-6 col-lg-5 d-none d-md-block">
-                                            <img
-                                                id="fondo"
-                                                src={costa}
-                                                alt="login form"
-                                                className="img-fluid"
-                                                style={{ borderRadius: '1rem 0 0 1rem', marginTop: '40%' }}
-                                            />
+                                            <img id="fondo" src={costa} alt="login form" className="img-fluid" style={{ borderRadius: '1rem 0 0 1rem', marginTop: '40%' }}/>
                                         </div>
                                         <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                             <div className="card-body p-4 p-lg-5 text-black">
@@ -117,25 +122,13 @@ export const Login = () => {
                                                 </h5>
 
                                                 <div className="form-floating mb-4">
-                                                    <input
-                                                        type="email"
-                                                        name="email"
-                                                        onChange={handleChange}
-                                                        className="form-control mt-3"
-                                                        id="floatingInput"
-                                                        placeholder="Ingrese usuario"
+                                                    <input type="email" name="email" onChange={handleChange} className="form-control mt-3" id="floatingInput" placeholder="Ingrese usuario"
                                                     />
                                                     <label htmlFor="floatingInput">Correo</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
-                                                    <input
-                                                        type="password"
-                                                        name="password"
-                                                        onChange={handleChange}
-                                                        className="form-control"
-                                                        id="floatingPassword"
-                                                        placeholder="Ingrese contraseña"
+                                                    <input type="password" name="password" onChange={handleChange} className="form-control" id="floatingPassword" placeholder="Ingrese contraseña"
                                                     />
                                                     <label htmlFor="floatingPassword">Contraseña</label>
                                                 </div>
@@ -154,7 +147,6 @@ export const Login = () => {
                                                 </p>
                                                 <div className='d-flex justify-content-center align-items-center'>
                                                     <GoogleLogin
-
                                                         clientId={clientID}
                                                         onSuccess={onSuccess}
                                                         onFailure={onFailure}
