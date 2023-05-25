@@ -36,7 +36,7 @@ export function ListTask() {
       });
       setPlans(formattedTasks);
     });
-  }, [planTask]);
+  }, []);
 
   const deleteP = (id) => {
     swal({

@@ -14,18 +14,6 @@ import { getPlanById } from "../../services/TaskService";
 
 export function AddRisk() {
   const { id } = useParams();
-  useEffect(() => {
-    if (id != "add") {
-      getRisksByIdPlan(id).then((risks) => {
-        setRiskList(risks);
-      });
-      getPlanById(id).then((plan) => {
-        setPlan(plan);
-      });
-      console.log("Hola ",riskList)
-    }
-  }, []);
-
   const [riskList, setRiskList] = useState([]);
   const [changesMade, setChanges] = useState(false);
   const [showMessage, setMessage] = useState("changes pending to be save...");
@@ -37,6 +25,18 @@ export function AddRisk() {
     project_name: "",
     task_name: "",
   });
+
+  useEffect(() => {
+    if (id != "add") {
+      getRisksByIdPlan(id).then((risks) => {
+        setRiskList(risks);
+      });
+      getPlanById(id).then((plan) => {
+        setPlan(plan);
+      });
+      console.log("Hola ",riskList)
+    }
+  }, []);
 
   const projectsName2 = [
     { id: 1, label: "Project Hanks" },

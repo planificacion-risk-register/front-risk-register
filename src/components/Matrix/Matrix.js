@@ -24,6 +24,12 @@ const impact = [
 const Matrix = () => {
   const [risk, setRisk] = useState([]);
   const { id } = useParams();
+  const [riskList, setRiskList] = useState([
+    { impact: "", posibility: "", risk_count: 0 },
+  ]);
+
+  const [riskInformation, setRiskInformation] = useState([]);
+  const [displayChange, setDisplayChange] = useState(false);
   
   useEffect(() => {
     getRisksByIdPlan(id).then((risks) => {
@@ -35,13 +41,6 @@ const Matrix = () => {
     }
   }, [risk]);
   
-
-  const [riskList, setRiskList] = useState([
-    { impact: "", posibility: "", risk_count: 0 },
-  ]);
-
-  const [riskInformation, setRiskInformation] = useState([]);
-  const [displayChange, setDisplayChange] = useState(false);
 
   function addRiskMatrix() {
     const riskMatrix = [];

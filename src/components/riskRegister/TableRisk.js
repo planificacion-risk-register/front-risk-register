@@ -133,7 +133,7 @@ console.log(riskList)
       //mensaje un plan de acción al menos debe tener una línea
     }
   }
-console.log(deletedRisks)
+console.log(riskList)
   return (
     <div>
       {riskList.length > 0 && (
