@@ -17,3 +17,7 @@ export async function saveUser(user) {
             return response
         });
 }
+
+export async function createUser(user){
+    return await axios.post(url, user)
+}

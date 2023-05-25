@@ -1,5 +1,5 @@
 import axios from "axios"
-import { toastError } from "../components/utils/ToastNotify";
+import { toastError, toastSuccesBlack } from "../components/utils/ToastNotify";
 
 export const AxiosInterceptor = () => {
 
@@ -11,7 +11,7 @@ export const AxiosInterceptor = () => {
                 "Authorization": `Bearer ${authToken}`
             };
             request.headers = newHeaders
-            return request
+            return request 
     };
 
     axios.interceptors.request.use((request) => {
@@ -24,8 +24,28 @@ export const AxiosInterceptor = () => {
             return response
         },
         (error) => {
-            toastError("Acceso denegado")
-                window.location.href = "/";
+            //SnackbarUtilities.error(getValidationError(error.code))
+            console.log('error de: ',error)
+            const getGoogle = async () => {
+                const google = localStorage.getItem("google")
+                return google
+            }
+
+            if(error.response.status === 400){
+                const googleResult = getGoogle()
+                console.log("google response: ", googleResult)
+                if(googleResult!==null){
+                    toastSuccesBlack("Usuario de google ya existente")
+                }else{
+                    toastError(error.response.data.msg)
+                }
+            }else if(error.response.status === 401){
+                toastError(`Accesso invalido ${error.code}`)
+                setTimeout(function(){
+                    window.location.href = "/";
+                },1500)
+            }
+            //console.log("error", getValidationError(error.code))
                 return Promise.reject(error)
         }
     )
