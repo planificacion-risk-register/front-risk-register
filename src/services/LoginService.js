@@ -4,18 +4,14 @@ const url = "https://localhost:7287/api/Login"
 
 
 export async function newLogin(login) {
-    return await axios
-        .post(url, login)
-        .then((response) => {
-            const data = response.data
-            console.log(data)
-            return data
-        })
-        .catch((error) => {
-            console.error("Error al guardar!", error);
-            const response = error
-            return response
-        });
+    try{
+        const response = await axios.post(url, login)
+        console.log(response.data)
+        return response
+    }catch(error){
+        console.log(error)
+        return error
+    }
 }
 
 export async function loginGoogle(login) {

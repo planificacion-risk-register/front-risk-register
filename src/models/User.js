@@ -6,7 +6,7 @@ export function ModelUser() {
         email: "",
         firstName: "",
         lastName: "",
-        rol: ""
+        rol: "usuario"
     }
     return user;
 }

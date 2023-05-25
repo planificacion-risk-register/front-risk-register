@@ -7,12 +7,15 @@ import logo from '../../statics/img/slogan1.png'
 import { newLogin, loginGoogle } from '../../services/LoginService'
 import { saveUser } from '../../services/UserService'
 import { toastSucces, toastInfo, toastError, toastWarning } from '../utils/ToastNotify'
+import { Link, useNavigate } from 'react-router-dom'
+import './style/create.css'
 
 export const Login = () => {
 
     const clientID = "481489586127-t28bb9ijuf6tdeet2kv93q4nb4bpvuel.apps.googleusercontent.com"
     const [user, setUser] = useState({});
     const [login, setLogin] = useState(LoginModel())
+    const navigate = useNavigate()
 
     const onSuccess = async (response) => {
         let result = false
@@ -31,7 +34,7 @@ export const Login = () => {
 
         await saveUser(userConst).then((data) => {
   
-            //si ya existe el usuario creado
+            //si no existe el usuario y vamos a registrarlo por primera vez con google
             if(data.msg==="Usuario guardado con éxito"){
                 console.log("usuario creado succes")
                 toastSucces(data.msg+', favor iniciar sesión otra vez')
@@ -41,7 +44,7 @@ export const Login = () => {
                 console.log("ya existe el usuario: ", result)
             }
         })
-        
+        //Cuando existe la cuenta google y nada mas logueamos
         if(result){
             //Para poder loguear con una cuenta google ya creada
             const google = {
@@ -52,6 +55,7 @@ export const Login = () => {
                 localStorage.setItem("token", data.token)
                 localStorage.setItem("email", google.email)
                 toastInfo(`Sesión iniciada en ${google.email}`)
+                navigate("/list")
             })
         }
         
@@ -86,16 +90,17 @@ export const Login = () => {
             toastError('El email no es válido')
             return
         }
-        newLogin(login).then((data) =>{
-            if(data.response.status===400){
-                toastError(data.response.data.error)
-            }else {
-                console.log("desde login",data.token)
-                localStorage.setItem("token", data.token)
+        newLogin(login).then((data)=>{
+            if(data.status===200){
+                //console.log("desde login",data.data.token)
+                localStorage.setItem("token", data.data.token)
                 localStorage.setItem("email", login.email)
                 toastInfo(`Sesión iniciada en ${login.email}`)
+                navigate("/list")
+            } else if(data.response.status===400){
+                console.log("mal")
+                toastError(data.response.data.error)
             }
-
         })
     }
 
@@ -143,7 +148,7 @@ export const Login = () => {
                                                     ¿Olvidaste tu contraseña?
                                                 </a>
                                                 <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                                                    ¿No tienes cuenta? <a href="/signIn" style={{ color: '#f64343' }}>Registrarse</a>
+                                                    ¿No tienes cuenta? <Link to={'/createUser'} style={{ color: '#f64343' }}>Registrarse</Link>
                                                 </p>
                                                 <div className='d-flex justify-content-center align-items-center'>
                                                     <GoogleLogin
