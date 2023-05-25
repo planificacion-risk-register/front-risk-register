@@ -92,7 +92,7 @@ export const Login = () => {
             return
         }
 
-        /*await newLogin(login).then((data)=>{
+        await newLogin(login).then((data)=>{
             if(data.status===200){
                 //console.log("desde login",data.data.token)
                 localStorage.setItem("token", data.data.token)
@@ -103,15 +103,16 @@ export const Login = () => {
                 console.log("mal")
                 toastError(data.response.data.error)
             }
-        })*/
-        await loginPage(login).then((data)=> {
+        })
+        //Cuando existe el interceptor
+        /*await loginPage(login).then((data)=> {
             localStorage.setItem(data.data.token)
             localStorage.setItem("email", login.email)
             toastInfo(`Sesión iniciada en ${login.email}`)
             navigate("/list")
         }).catch((error)=> {
             console.log('error login',error)
-        })
+        })*/
     }
 
     return (

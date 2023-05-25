@@ -5,7 +5,7 @@ import costa from '../../statics/img/costa-rica.jpg'
 import logo from '../../statics/img/slogan1.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { toastSucces, toastError, toastWarning } from '../utils/ToastNotify'
-import { saveUser, createUser } from '../../services/UserService'
+import { saveUser,createUser } from '../../services/UserService'
 import './style/create.css'
 
 export const CreateUser = () => {
@@ -51,7 +51,7 @@ export const CreateUser = () => {
             rol: user.rol,
             userName: user.userName
         }
-        /*saveUser(userFinal).then((data) => {
+        saveUser(userFinal).then((data) => {
             if(data.msg==="Usuario guardado con éxito"){
                 toastSucces(data.msg)
                 navigate("/")
@@ -59,14 +59,15 @@ export const CreateUser = () => {
                 console.log("entre al error 400")
                 toastError(data.response.data.msg)
             }
-        })*/
-        await createUser(userFinal).then((data) => {
+        })
+        //con el interceptor
+       /*await createUser(userFinal).then((data) => {
             console.log(data.data)
             toastSucces(data.data.msg)
             navigate("/")
         }).catch((error) => {
             console.log(error)
-        })
+        })*/
     }
 
     return (

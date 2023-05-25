@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getUsers } from '../../services/pruebaToken'
-import { SnackbarProvider } from 'notistack'
-import { SnackbarUtilitiesConfigurator } from '../utilities/snackbar-manager'
-import { toastError } from '../utils/ToastNotify'
+
 export const ListUsers = () => {
     const [users, setUsers] = useState({})
 
