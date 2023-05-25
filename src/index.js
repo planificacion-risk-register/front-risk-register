@@ -6,6 +6,9 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import RoutesPlan from './routes/RoutesPlan';
+import { AxiosInterceptor } from './interceptors/axios.interceptor';
+
+//AxiosInterceptor();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

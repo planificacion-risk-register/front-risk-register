@@ -80,7 +80,7 @@ export const Login = () => {
         setLogin({ ...login, [name]: value })
     }
  
-    const handleLogin = () => {
+    const handleLogin = async () => {
         const email_expresion = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
         if(login.email === ''|| login.password === ''){
             toastWarning('Todos los campos son obligatorios')
@@ -90,7 +90,8 @@ export const Login = () => {
             toastError('El email no es válido')
             return
         }
-        newLogin(login).then((data)=>{
+
+        await newLogin(login).then((data)=>{
             if(data.status===200){
                 //console.log("desde login",data.data.token)
                 localStorage.setItem("token", data.data.token)

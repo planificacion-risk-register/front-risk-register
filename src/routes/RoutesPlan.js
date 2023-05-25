@@ -8,7 +8,7 @@ import { ListTask } from '../components/riskRegister/ListTask';
 import { CreateUser } from '../components/login/CreateUser';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-
+import { ListUsers } from '../components/login/ListUsers';
 
 export default function RoutesPlan() {
   return (
@@ -20,6 +20,7 @@ export default function RoutesPlan() {
             <Route path='/matrix/:id' element={<Matrix></Matrix>}></Route>
             <Route path='/list' element={<ListTask></ListTask>}></Route>
             <Route path='/createUser' element={<CreateUser></CreateUser>}></Route>
+            <Route path='/listUsers' element={<ListUsers></ListUsers>}></Route>
         </Routes>
         <ToastContainer/>
     </Router>
