@@ -4,7 +4,7 @@ import { gapi } from 'gapi-script'
 import { LoginModel } from '../../models/Login'
 import costa from '../../statics/img/costa-rica.jpg'
 import logo from '../../statics/img/slogan1.png'
-import { newLogin, loginGoogle } from '../../services/LoginService'
+import { newLogin, loginGoogle, loginPage } from '../../services/LoginService'
 import { saveUser } from '../../services/UserService'
 import { toastSucces, toastInfo, toastError, toastWarning } from '../utils/ToastNotify'
 import { Link, useNavigate } from 'react-router-dom'
@@ -41,6 +41,7 @@ export const Login = () => {
                 localStorage.setItem("email", userConst.email)
             }else if(data.response.status===400){
                 result = true
+                localStorage.setItem("google",true)
                 console.log("ya existe el usuario: ", result)
             }
         })
@@ -103,6 +104,15 @@ export const Login = () => {
                 toastError(data.response.data.error)
             }
         })
+        //Cuando existe el interceptor
+        /*await loginPage(login).then((data)=> {
+            localStorage.setItem(data.data.token)
+            localStorage.setItem("email", login.email)
+            toastInfo(`Sesión iniciada en ${login.email}`)
+            navigate("/list")
+        }).catch((error)=> {
+            console.log('error login',error)
+        })*/
     }
 
     return (

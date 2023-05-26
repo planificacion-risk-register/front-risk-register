@@ -4,16 +4,14 @@ import { getUsers } from '../../services/pruebaToken'
 export const ListUsers = () => {
     const [users, setUsers] = useState({})
 
-    const fectchList = async () =>{
-        const {data} = await getUsers()
-        setUsers(data)
-    }
     useEffect(() =>{
-        try {
-            fectchList()
-        } catch (error) {
-            console.log(error)
-        }
+        getUsers().then((data)=> {
+            setUsers(data.data)
+        }).catch((error)=> {
+            console.log("error: ",error)
+            //toastError("Acceso no autorizado", error)
+        })            
+
     }, [])
     return(
         <div>

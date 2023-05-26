@@ -13,6 +13,19 @@ export function toastSucces(msg){
         });
 }
 
+export function toastSuccesBlack(msg){
+    toast.success(msg, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+}
+
 export function toastInfo(msg){
     toast.info(msg, {
         position: "bottom-right",

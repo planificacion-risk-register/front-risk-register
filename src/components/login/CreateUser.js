@@ -5,7 +5,7 @@ import costa from '../../statics/img/costa-rica.jpg'
 import logo from '../../statics/img/slogan1.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { toastSucces, toastError, toastWarning } from '../utils/ToastNotify'
-import { saveUser } from '../../services/UserService'
+import { saveUser,createUser } from '../../services/UserService'
 import './style/create.css'
 
 export const CreateUser = () => {
@@ -13,37 +13,37 @@ export const CreateUser = () => {
     const [user, setUser] = useState(ModelUser())
     const email_expresion = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
     const password_expresion = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z]).{8,}$/;
-    const [confirmPassword, setConfirmPassword] = useState({confirmPassword:""})
+    const [confirmPassword, setConfirmPassword] = useState({ confirmPassword: "" })
     const navigate = useNavigate()
 
     const handleChange = (e) => {
         const value = e.target.value
         const name = e.target.name
         setUser({ ...user, [name]: value })
-        setConfirmPassword({...confirmPassword, [name]: value})
+        setConfirmPassword({ ...confirmPassword, [name]: value })
     }
     console.log(confirmPassword)
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
 
-        if(user.email === ''|| user.password === '' || user.firstName === '' || user.lastName === ''){
+        if (user.email === '' || user.password === '' || user.firstName === '' || user.lastName === '') {
             toastWarning('Todos los campos son obligatorios')
             return
         }
-        if(!email_expresion.test(user.email)){
+        if (!email_expresion.test(user.email)) {
             toastError('El email no es válido')
             return
         }
-        if(!password_expresion.test(user.password)){
+        if (!password_expresion.test(user.password)) {
             toastWarning('La contraseña debe tener al menos 8 caracteres y al menos 1 dígito, 1 letra minúscula y 1 letra mayúscula')
             return
         }
-        if(confirmPassword.confirmPassword!==user.password){
+        if (confirmPassword.confirmPassword !== user.password) {
             toastWarning('La contraseña no coincide')
             return
         }
 
-        const userFinal =  {
+        const userFinal = {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
@@ -60,6 +60,14 @@ export const CreateUser = () => {
                 toastError(data.response.data.msg)
             }
         })
+        //con el interceptor
+       /*await createUser(userFinal).then((data) => {
+            console.log(data.data)
+            toastSucces(data.data.msg)
+            navigate("/")
+        }).catch((error) => {
+            console.log(error)
+        })*/
     }
 
     return (
@@ -85,32 +93,32 @@ export const CreateUser = () => {
                                             <div className="form-container">
 
                                                 <div className="form-floating mb-4">
-                                                    <input type="text" name="firstName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required/>
+                                                    <input type="text" name="firstName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
                                                     <label htmlFor="floatingInput">Nombre</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
-                                                    <input type="text" name="lastName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required/>
+                                                    <input type="text" name="lastName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
                                                     <label htmlFor="floatingInput">Apellido</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
-                                                    <input type="text" name="userName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required/>
+                                                    <input type="text" name="userName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
                                                     <label htmlFor="floatingInput">Usuario</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
-                                                    <input type="email" name="email" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required/>
+                                                    <input type="email" name="email" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
                                                     <label htmlFor="floatingInput">Correo</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
-                                                    <input type="password" name="password" onChange={handleChange} className="form-control" id="floatingPassword" minLength="5" required/>
+                                                    <input type="password" name="password" onChange={handleChange} className="form-control" id="floatingPassword" minLength="5" required />
                                                     <label htmlFor="floatingPassword">Contraseña</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
-                                                    <input type="password" name="confirmPassword" onChange={handleChange} className="form-control" id="floatingPassword" minLength="3" required/>
+                                                    <input type="password" name="confirmPassword" onChange={handleChange} className="form-control" id="floatingPassword" minLength="3" required />
                                                     <label htmlFor="floatingPassword">Confirmar contraseña</label>
                                                 </div>
 
@@ -120,7 +128,7 @@ export const CreateUser = () => {
                                                     Registrar
                                                 </button>
                                             </div>
-                                            <br/>
+                                            <br />
                                             <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
                                                 <Link to={'/'} style={{ color: '#f64343' }}>
                                                     regresar

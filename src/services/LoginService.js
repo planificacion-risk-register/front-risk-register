@@ -14,6 +14,10 @@ export async function newLogin(login) {
     }
 }
 
+export async function loginPage(login){
+    return await axios.post(url, login)
+}
+
 export async function loginGoogle(login) {
     return await axios
         .post(url+"/google", login)
