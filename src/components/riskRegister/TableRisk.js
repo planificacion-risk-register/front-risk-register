@@ -18,28 +18,6 @@ const TableRisk = ({
     addRow();
   }, []);
 
-  const owners = [
-    { id: "1", nombre: "Maria Belén Rojas", edad: 30 },
-    { id: "2", nombre: "Gustavo Hernandez", edad: 35 },
-    { id: "3", nombre: "Shesly Obando", edad: 28 },
-    // Más objetos de propietarios
-  ];
-  const probability = [
-    { id: "1", label: "Rare 1" },
-    { id: "2", label: "Unlikely 2" },
-    { id: "3", label: "Moderate 3" },
-    { id: "4", label: "likely 4" },
-    { id: "5", label: "Almost certain 5" },
-  ];
-
-  const impact = [
-    { id: "1", label: "Insignificant 1" },
-    { id: "2", label: "Minor 2" },
-    { id: "3", label: "Significant 3" },
-    { id: "4", label: "Major 4" },
-    { id: "5", label: "Severe 5" },
-  ];
-
   const priority = [
     { id: "1", label: "1" },
     { id: "2", label: "2" },
