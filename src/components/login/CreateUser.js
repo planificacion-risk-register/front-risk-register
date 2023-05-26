@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { ModelUser } from '../../models/User'
-import costa from '../../statics/img/costa-rica.jpg'
-import logo from '../../statics/img/slogan1.png'
+import logo from '../../statics/img/slogan2.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { toastSucces, toastError, toastWarning } from '../utils/ToastNotify'
 import { saveUser,createUser } from '../../services/UserService'
@@ -72,14 +71,14 @@ export const CreateUser = () => {
 
     return (
         <div className="grapper">
-            <section className="vh-100" style={{ backgroundColor: '#b8f184' }}>
+            <section className="vh-100" style={{ backgroundColor: '#ffceee' }}>
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col col-xl-10">
                             <div className="card" style={{ borderRadius: '1rem' }}>
                                 <div className="row g-0">
-                                    <div className="col-md-6 col-lg-5 d-none d-md-block">
-                                        <img id="fondo" src={costa} alt="login form" className="img-fluid" style={{ borderRadius: '1rem 0 0 1rem', marginTop: '40%' }} />
+                                    <div className="col-md-6 col-lg-5 d-none d-md-block" id="fondo-create">
+                                        <img src="https://preview.colorlib.com/theme/bootstrap/login-form-08/images/undraw_file_sync_ot38.svg" alt="login form" className="img-fluid" style={{ borderRadius: '1rem 0 0 1rem', marginTop: '40%' }} />
                                     </div>
                                     <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                         <div className="card-body p-4 p-lg-5 text-black">
@@ -87,51 +86,51 @@ export const CreateUser = () => {
                                                 <img className="logo" src={logo} alt="logo" />
                                             </div>
 
-                                            <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px' }}>
-                                                crear cuenta
+                                            <h5 className="fw-normal mb-3 pb-3" style={{ letterSpacing: '1px', fontFamily: 'sans-serif'}}>
+                                                Create account
                                             </h5>
                                             <div className="form-container">
 
                                                 <div className="form-floating mb-4">
                                                     <input type="text" name="firstName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
-                                                    <label htmlFor="floatingInput">Nombre</label>
+                                                    <label htmlFor="floatingInput">First Name</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
                                                     <input type="text" name="lastName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
-                                                    <label htmlFor="floatingInput">Apellido</label>
+                                                    <label htmlFor="floatingInput">Last Name</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
                                                     <input type="text" name="userName" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
-                                                    <label htmlFor="floatingInput">Usuario</label>
+                                                    <label htmlFor="floatingInput">Username</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
                                                     <input type="email" name="email" onChange={handleChange} className="form-control" id="floatingInput" minLength="3" required />
-                                                    <label htmlFor="floatingInput">Correo</label>
+                                                    <label htmlFor="floatingInput">Email</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
                                                     <input type="password" name="password" onChange={handleChange} className="form-control" id="floatingPassword" minLength="5" required />
-                                                    <label htmlFor="floatingPassword">Contraseña</label>
+                                                    <label htmlFor="floatingPassword">Password</label>
                                                 </div>
 
                                                 <div className="form-floating mb-4">
                                                     <input type="password" name="confirmPassword" onChange={handleChange} className="form-control" id="floatingPassword" minLength="3" required />
-                                                    <label htmlFor="floatingPassword">Confirmar contraseña</label>
+                                                    <label htmlFor="floatingPassword">Confirm Password</label>
                                                 </div>
 
                                             </div>
                                             <div className="d-grid gap-2 mt-3">
                                                 <button type="button" className="btn btn-secondary btn-lg mt-lg-2" onClick={onSubmit}>
-                                                    Registrar
+                                                    To register
                                                 </button>
                                             </div>
                                             <br />
                                             <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>
-                                                <Link to={'/'} style={{ color: '#f64343' }}>
-                                                    regresar
+                                                <Link to={'/'} style={{ color: '#f64343', fontSize: 'large' }}>
+                                                    Back
                                                 </Link>
                                             </p>
 
