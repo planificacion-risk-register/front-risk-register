@@ -5,9 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  padding-bottom: 4em;
+  min-height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.card-center{
+  color: rgb(44, 18, 33);
+  background-color: #ff629e;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-family: cursive;
+  font-size: x-large;
+  -webkit-box-shadow: 9px 12px 5px 3px rgba(184,182,184,0.62);
+-moz-box-shadow: 9px 12px 5px 3px rgba(184,182,184,0.62);
+box-shadow: 9px 12px 5px 3px rgba(184,182,184,0.62);
 }

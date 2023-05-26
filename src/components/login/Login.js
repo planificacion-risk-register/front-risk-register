@@ -9,6 +9,7 @@ import { saveUser } from '../../services/UserService'
 import { toastSucces, toastInfo, toastError, toastWarning } from '../utils/ToastNotify'
 import { Link, useNavigate } from 'react-router-dom'
 import './style/create.css'
+import { Footer2 } from '../templates/Footer2'
 
 export const Login = () => {
 
@@ -180,15 +181,6 @@ export const Login = () => {
                     </div>
                 </section>
             </div>
-
-            <div className={user ? "profile" : "hidden"}>
-                <img className='nada' src={user.imageUrl} height="200" />
-                <h3>{user.name}</h3><br/>
-                <h3>{user.email}</h3>
-            </div>
-
-
-
         </div>
     )
 }

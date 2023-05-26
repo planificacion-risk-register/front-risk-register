@@ -21,3 +21,7 @@ export async function saveUser(user) {
 export async function createUser(user){
     return await axios.post(url, user)
 }
+
+export async function getUserEmail(data){
+    return await axios.get(url+'/GetUser', {params: {email: data}},)
+}
