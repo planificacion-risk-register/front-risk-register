@@ -9,10 +9,16 @@ import { CreateUser } from '../components/login/CreateUser';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { ListUsers } from '../components/login/ListUsers';
+import AuthGuard from '../guards/auth.guard';
+import Header from '../components/templates/header';
+import Navbar from '../components/templates/navbar';
+import { Perfil } from '../components/users/perfil';
+import { Footer } from '../components/templates/footer';
 
 export default function RoutesPlan() {
   return (
     <Router>
+      <Navbar/>
         <Routes>
             <Route path='/' element={<Login></Login>}></Route>
             <Route path='/app' element={<App></App>}></Route>
@@ -21,7 +27,12 @@ export default function RoutesPlan() {
             <Route path='/list' element={<ListTask></ListTask>}></Route>
             <Route path='/createUser' element={<CreateUser></CreateUser>}></Route>
             <Route path='/listUsers' element={<ListUsers></ListUsers>}></Route>
+            <Route path='/perfil' element={<Perfil></Perfil>}></Route>
+            <Route element={<AuthGuard/>}>
+              <Route path='/listPrueba' element={<ListTask></ListTask>}></Route>
+            </Route>
         </Routes>
+        <Footer/>
         <ToastContainer/>
     </Router>
   )
