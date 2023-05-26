@@ -37,6 +37,15 @@ export function ListTask() {
       setPlans(formattedTasks);
     });
   }, []);
+//cambiarlo pro la lista tarida del back
+  const projectsName = [
+    { id: 1, label: "Project Hanks" },
+    { id: 2, label: "Kodiak" },
+    { id: 3, label: "Code Talkers" },
+    { id: 4, label: "Project Blue Book" },
+    { id: 5, label: "Project 404" },
+  ];
+
 
   const deleteP = (id) => {
     swal({
@@ -86,7 +95,7 @@ export function ListTask() {
           <tbody>
             {planTask.map((item, index) => (
               <tr key={item.id_plan}>
-                <td>{item.id_project}</td>
+                <td>{projectsName.find(project => project.id === item.id_project)?.label || "Proyecto no encontrado"}</td>
                 <td>{item.id_task}</td>
                 <td>{item.task_name}</td>
                 <td>{item.last_update}</td>

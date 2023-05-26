@@ -19,9 +19,9 @@ const TableRisk = ({
   }, []);
 
   const owners = [
-    { id: "1", nombre: "Propietario 1", edad: 30 },
-    { id: "2", nombre: "Propietario 2", edad: 35 },
-    { id: "3", nombre: "Propietario 3", edad: 28 },
+    { id: "1", nombre: "Maria Belén Rojas", edad: 30 },
+    { id: "2", nombre: "Gustavo Hernandez", edad: 35 },
+    { id: "3", nombre: "Shesly Obando", edad: 28 },
     // Más objetos de propietarios
   ];
   const probability = [
