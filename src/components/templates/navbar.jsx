@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './style.css';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import logo from '../../statics/img/slogan1.png'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear, faCircleUser, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";

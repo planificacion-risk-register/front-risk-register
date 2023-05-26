@@ -10,10 +10,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { ListUsers } from '../components/login/ListUsers';
 import AuthGuard from '../guards/auth.guard';
-import Header from '../components/templates/header';
 import Navbar from '../components/templates/navbar';
 import { Perfil } from '../components/users/perfil';
-import { Footer } from '../components/templates/footer';
+import { Footer2 } from '../components/templates/Footer2';
 
 export default function RoutesPlan() {
   return (
@@ -32,8 +31,8 @@ export default function RoutesPlan() {
               <Route path='/listPrueba' element={<ListTask></ListTask>}></Route>
             </Route>
         </Routes>
-        <Footer/>
         <ToastContainer/>
+        <Footer2/>
     </Router>
   )
 }
