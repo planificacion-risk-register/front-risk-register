@@ -5,6 +5,29 @@ import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import "./block.css";
 
 const RiskBlock = ({ riskList, setDisplayChange }) => {
+
+  const owners = [
+    { id: "1", name: "Maria Belén Rojas", edad: 30 },
+    { id: "2", name: "Gustavo Hernandez", edad: 35 },
+    { id: "3", name: "Shesly Obando", edad: 28 },
+    // Más objetos de propietarios
+  ];
+  const probability = [
+    { id: "1", label: "Rare 1" },
+    { id: "2", label: "Unlikely 2" },
+    { id: "3", label: "Moderate 3" },
+    { id: "4", label: "likely 4" },
+    { id: "5", label: "Almost certain 5" },
+  ];
+
+  const impact = [
+    { id: "1", label: "Insignificant 1" },
+    { id: "2", label: "Minor 2" },
+    { id: "3", label: "Significant 3" },
+    { id: "4", label: "Major 4" },
+    { id: "5", label: "Severe 5" },
+  ];
+
   return (
     <div className="container">
       <div className="table-wrapper-scroll-y">
@@ -27,7 +50,7 @@ const RiskBlock = ({ riskList, setDisplayChange }) => {
                     type="text"
                     readOnly
                     className={`form-control-plaintext risk-${data.impact}`}
-                    value={data.impact}
+                    value={impact.find(impact => impact.id === data.impact)?.label}
                   />
                 </div>
                 <div className="col">
@@ -35,8 +58,8 @@ const RiskBlock = ({ riskList, setDisplayChange }) => {
                   <input
                     type="text"
                     readOnly
-                    className="form-control-plaintext"
-                    value={data.probability}
+                    className={`form-control-plaintext risk-${data.probability}`}
+                    value={probability.find(probability => probability.id === data.probability)?.label}
                   />
                 </div>
                 <div className="col">
@@ -106,7 +129,7 @@ const RiskBlock = ({ riskList, setDisplayChange }) => {
                     type="text"
                     readOnly
                     className="form-control-plaintext"
-                    value={data.owner}
+                    value={owners.find(owner => owner.id === data.owner)?.name}
                   />
                 </div>
               </div>

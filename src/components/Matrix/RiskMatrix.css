@@ -39,3 +39,50 @@
   .risk-4-5, .risk-5-4, .risk-5-4, .risk-5-5{
     background-color: rgb(170, 7, 7);
   }
+
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: fixed;
+    font-style: normal;
+    color: rgb(50, 60, 249);
+    font-size: 25px;
+    left: 0;
+    top: 50%;
+    transform: translate(300%, -200%) rotate(180deg);
+    width: 100px; /* Ajusta el ancho según sea necesario */
+    white-space: nowrap;
+  }
+  
+  .vertical-text-TWO {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: fixed;
+    font-style: normal;
+    color: rgb(163, 35, 114);
+    font-size: 15px;
+    left: 0;
+    top: 50%;
+    transform: translate(350%, -90%) rotate(180deg);
+    width: 100px; /* Ajusta el ancho según sea necesario */
+    white-space: nowrap;
+  }
+  .matrix-container {
+    display: flex;
+  }
+
+  .text {
+    font-style: normal;
+    color: rgb(50, 60, 249);
+    font-size: 25px;
+    width: 200px; /* Ajusta el ancho según sea necesario */
+    margin-left: 610px; /* Ajusta el margen izquierdo según tus necesidades */
+  }
+
+  .subtext {
+    font-style: normal;
+    color: rgb(163, 35, 114);
+    font-size: 15px;
+    width: 500px; /* Ajusta el ancho según sea necesario */
+    margin-left: 525px; /* Ajusta el margen izquierdo según tus necesidades */
+  }

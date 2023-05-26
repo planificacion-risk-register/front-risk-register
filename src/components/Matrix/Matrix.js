@@ -74,6 +74,11 @@ const Matrix = () => {
   
   return (
     <div className="container">
+       <div className="vertical-text">IMPACT</div>
+       <div className="vertical-text-TWO">What is the probability the risk wil happen?</div>
+      <div className="text">PROBABILITY</div>
+      <div className="subtext">How severe would the outcomes be if the risk ocurred?</div>
+      <br></br>
       {riskList.length > 1 && (
         <table className="risk-matrix">
           <thead>
@@ -84,34 +89,35 @@ const Matrix = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {impact.map((i, indexA) => (
-              <tr key={i.value}>
-                <th>{i.label}</th>
-                {probability.map((j, indexB) => {
-                  const risk = riskList.find(
-                    (data) =>
-                      data.impact === i.value && data.probability === j.value
-                  );
+<tbody>
+  {impact.map((i, indexA) => (
+    <tr key={i.value}>
+      <th className="vertical-label">{i.label}</th> {/* Nueva columna */}
+      {probability.map((j, indexB) => {
+        const risk = riskList.find(
+          (data) =>
+            data.impact === i.value && data.probability === j.value
+        );
 
-                  return (
-                    <td
-                      key={j.value}
-                      className={`risk-${i.value}-${j.value}`}
-                      style={{ width: "150px", height: "100px" }}
-                      onClick={(e) => handleClick(j.value, i.value)}
-                    >
-                      {risk ? `Risk count: ${risk.risk_count}` : null}
-                      <br></br>
-                      {risk
-                        ? `Total point ${risk.risk_count * i.value * j.value}`
-                        : null}
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
+        return (
+          <td
+            key={j.value}
+            className={`risk-${i.value}-${j.value}`}
+            style={{ width: "150px", height: "100px" }}
+            onClick={(e) => handleClick(j.value, i.value)}
+          >
+            {risk ? `Risk count: ${risk.risk_count}` : null}
+            <br></br>
+            {risk
+              ? `Total point ${risk.risk_count * i.value * j.value}`
+              : null}
+          </td>
+        );
+      })}
+    </tr>
+  ))}
+</tbody>
+
         </table>
       )}
       <br></br> <br></br>
