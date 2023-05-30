@@ -10,6 +10,10 @@ import TableRisk from "./TableRisk";
 import FormRisk from "./FormRisk";
 import { getRisksByIdPlan } from "../../services/RiskService";
 import { getPlanById } from "../../services/TaskService";
+import { getProjects } from "../../services/SecondaryTables";
+import { getOwners } from "../../services/SecondaryTables";
+import { getProbability } from "../../services/SecondaryTables";
+import { getImpacts } from "../../services/SecondaryTables";
 
 
 export function AddRisk() {
@@ -18,6 +22,9 @@ export function AddRisk() {
   const [changesMade, setChanges] = useState(false);
   const [showMessage, setMessage] = useState("changes pending to be save...");
   const [projectsName, setProjects] = useState([]);
+  const [owners, setOwners] = useState([]);
+  const [probability, setProbability] = useState([]);
+  const [impact, setImpact] = useState([]);
   const [deletedRisks, setDeleted] = useState([]);
   const [isPlanSaved, setSaved] = useState(false);
   const [planRegister, setPlan] = useState({
@@ -34,17 +41,27 @@ export function AddRisk() {
       getPlanById(id).then((plan) => {
         setPlan(plan);
       });
-      console.log("Hola ",riskList)
     }
+
+    getProjects().then((project) => {
+      setProjects(project);
+    });
+
+    getOwners().then((owner) => {
+      setOwners(owner);
+      console.log("holi",owner)
+    });
+
+    getProbability().then((probability) => {
+      setProbability(probability);
+    });
+
+    getImpacts().then((impact) => {
+      setImpact(impact);
+    });
+    
   }, []);
 
-  const projectsName2 = [
-    { id: 1, label: "Project Hanks" },
-    { id: 2, label: "Kodiak" },
-    { id: 3, label: "Code Talkers" },
-    { id: 4, label: "Project Blue Book" },
-    { id: 5, label: "Project 404" },
-  ];
 
   const saveInformation = () => {
     const lastRisk = riskList[riskList.length - 1];
@@ -85,8 +102,10 @@ export function AddRisk() {
     });
   };
 
+  console.log("HOLA",owners)
   return (
-    <div className="container shadow" style={{ padding: 0 }}>
+
+    <div className="container shadow" style={{ padding: 0, marginTop: "50px" }}>
       <div className="form-title">Risk register details</div>
       <br />
       <Button
@@ -118,7 +137,7 @@ export function AddRisk() {
                 task={planRegister}
                 setTask={setPlan}
                 setChanges={setChanges}
-                projectsName={projectsName2}
+                projectsName={projectsName}
               />
               <TableRisk
                 riskList={riskList}
@@ -126,17 +145,20 @@ export function AddRisk() {
                 setChanges={setChanges}
                 deletedRisks={deletedRisks}
                 setDeleted={setDeleted}
+                ownersName= {owners} 
+                probability ={probability}
+                impact = {probability}
               />
             </>
           )}
         </>
-      ) : (
+      ) : owners.length>0 && probability.length>0 && impact.length >0 &&(
         <>
           <FormRisk
             task={planRegister}
             setTask={setPlan}
             setChanges={setChanges}
-            projectsName={projectsName2}
+            projectsName={projectsName}
           />
           <TableRisk
             riskList={riskList}
@@ -144,6 +166,9 @@ export function AddRisk() {
             setChanges={setChanges}
             deletedRisks={deletedRisks}
             setDeleted={setDeleted}
+            ownersName= {owners} 
+            probability ={probability}
+            impact = {probability}
           />
         </>
       )}

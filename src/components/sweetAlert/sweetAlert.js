@@ -15,6 +15,7 @@ const SweetAlertC = ({
   setChanges,
   deletedList,
 }) => {
+  console.log("estoy a punto de guardar",risksList)
   async function handleConfirm() {
     const today = new Date().toISOString().substr(0, 10);
     const totalPoints = calculateTotalPoints();

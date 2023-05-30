@@ -117,7 +117,7 @@ export const Login = () => {
     return (
         <div className="center">
             <div className="grapper">
-                <section className="vh-100" style={{ backgroundColor: '#0071f7' }}>
+                <section className="vh-100" style={{ backgroundColor: '#295bace8' }}>
                     <div className="container py-5 h-100">
                         <div className="row d-flex justify-content-center align-items-center h-100">
                             <div className="col col-xl-10">
