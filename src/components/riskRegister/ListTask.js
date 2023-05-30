@@ -50,9 +50,9 @@ export function ListTask() {
   const deleteP = (id) => {
     swal({
       title: "",
-      text: "¿Estás seguro de eliminar este plan de acción?",
+      text: "Are you sure to delete this plan?",
       icon: "warning",
-      buttons: ["Cancelar", "Aceptar"],
+      buttons: ["Cancel", "Accept"],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
