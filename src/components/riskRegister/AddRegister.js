@@ -95,7 +95,7 @@ export function AddRisk() {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        window.location.href = "/";
+        window.location.href = "/list";
       } else {
         console.log("Sigo en la misma página");
       }
