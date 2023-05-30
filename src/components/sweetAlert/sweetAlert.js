@@ -51,7 +51,7 @@ const SweetAlertC = ({
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        window.location.href = "/";
+        window.location.href = "/list";
         setIsSaved(false);
       } else {
         setIsSaved(false);
