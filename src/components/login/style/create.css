@@ -8,3 +8,8 @@
   .form-container .form-floating {
     grid-column: span 1;
   }
+
+  #fondo-create {
+    margin-top: 12%;
+  }
+
