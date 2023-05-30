@@ -101,8 +101,6 @@ export function AddRisk() {
       }
     });
   };
-
-  console.log("HOLA",owners)
   return (
 
     <div className="container shadow" style={{ padding: 0, marginTop: "50px" }}>
@@ -131,7 +129,7 @@ export function AddRisk() {
       )}
       {id !== "add" ? (
         <>
-          {riskList.length > 0 && Object.keys(planRegister).length > 0 && (
+          {riskList.length > 0 && Object.keys(planRegister).length > 0 && projectsName.length>0 &&  owners.length>0 &&  (
             <>
               <FormRisk
                 task={planRegister}
