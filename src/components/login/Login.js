@@ -2,7 +2,6 @@ import { React, useEffect, useState } from 'react'
 import GoogleLogin from 'react-google-login'
 import { gapi } from 'gapi-script'
 import { LoginModel } from '../../models/Login'
-import costa from '../../statics/img/costa-rica.jpg'
 import logo from '../../statics/img/slogan2.png'
 import { newLogin, loginGoogle, loginPage } from '../../services/LoginService'
 import { saveUser } from '../../services/UserService'
@@ -37,7 +36,7 @@ export const Login = () => {
             //si no existe el usuario y vamos a registrarlo por primera vez con google
             if(data.msg==="Usuario guardado con éxito"){
                 console.log("usuario creado succes")
-                toastSucces(data.msg+', favor iniciar sesión otra vez')
+                toastSucces(data.msg+', please login again')
                 localStorage.setItem("email", userConst.email)
             }else if(data.response.status===400){
                 result = true
@@ -55,7 +54,7 @@ export const Login = () => {
             await loginGoogle(google).then((data)=>{
                 localStorage.setItem("token", data.token)
                 localStorage.setItem("email", google.email)
-                toastInfo(`Sesión iniciada en ${google.email}`)
+                toastInfo(`session started ${google.email}`)
                 navigate("/list")
             })
         }
@@ -84,11 +83,11 @@ export const Login = () => {
     const handleLogin = async () => {
         const email_expresion = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
         if(login.email === ''|| login.password === ''){
-            toastWarning('Todos los campos son obligatorios')
+            toastWarning('All fields are required')
             return
         }
         if(!email_expresion.test(login.email)){
-            toastError('El email no es válido')
+            toastError('Email is not valid')
             return
         }
 
@@ -97,7 +96,7 @@ export const Login = () => {
                 //console.log("desde login",data.data.token)
                 localStorage.setItem("token", data.data.token)
                 localStorage.setItem("email", login.email)
-                toastInfo(`Sesión iniciada en ${login.email}`)
+                toastInfo(`session started in ${login.email}`)
                 navigate("/list")
             } else if(data.response.status===400){
                 console.log("mal")

@@ -35,12 +35,12 @@ export const AxiosInterceptor = () => {
                 const googleResult = getGoogle()
                 console.log("google response: ", googleResult)
                 if(googleResult!==null){
-                    toastSuccesBlack("Usuario de google ya existente")
+                    toastSuccesBlack("existing google user")
                 }else{
                     toastError(error.response.data.msg)
                 }
             }else if(error.response.status === 401){
-                toastError(`Accesso invalido ${error.code}`)
+                toastError(`Invalid access ${error.code}`)
                 setTimeout(function(){
                     window.location.href = "/";
                 },1500)

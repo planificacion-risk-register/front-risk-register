@@ -26,19 +26,19 @@ export const CreateUser = () => {
     const onSubmit = async () => {
 
         if (user.email === '' || user.password === '' || user.firstName === '' || user.lastName === '') {
-            toastWarning('Todos los campos son obligatorios')
+            toastWarning('All fields are required')
             return
         }
         if (!email_expresion.test(user.email)) {
-            toastError('El email no es válido')
+            toastError('The email is not valid')
             return
         }
         if (!password_expresion.test(user.password)) {
-            toastWarning('La contraseña debe tener al menos 8 caracteres y al menos 1 dígito, 1 letra minúscula y 1 letra mayúscula')
+            toastWarning('Password must have at least 8 characters and at least 1 digit, 1 lowercase letter and 1 uppercase letter')
             return
         }
         if (confirmPassword.confirmPassword !== user.password) {
-            toastWarning('La contraseña no coincide')
+            toastWarning('Password does not match')
             return
         }
 
