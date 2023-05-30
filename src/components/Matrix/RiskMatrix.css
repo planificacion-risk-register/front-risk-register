@@ -43,7 +43,7 @@
   .vertical-text {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    position: fixed;
+    position: absolute;
     font-style: normal;
     color: rgb(50, 60, 249);
     font-size: 25px;
@@ -57,7 +57,7 @@
   .vertical-text-TWO {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    position: fixed;
+    position: absolute;
     font-style: normal;
     color: rgb(163, 35, 114);
     font-size: 15px;
