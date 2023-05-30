@@ -13,10 +13,14 @@ const TableRisk = ({
   setChanges,
   deletedRisks,
   setDeleted,
+  ownersName,
+  impact, 
+  probability
 }) => {
   useEffect(() => {
     addRow();
   }, []);
+
 
   const priority = [
     { id: "1", label: "1" },
@@ -26,10 +30,6 @@ const TableRisk = ({
     { id: "5", label: "5" },
   ];
 
-  const ownersName = owners.map((propietario) => ({
-    id: propietario.id,
-    label: propietario.nombre,
-  }));
 console.log(riskList)
   const addRow = () => {
     const lastRisk = riskList[riskList.length - 1];
@@ -69,7 +69,7 @@ console.log(riskList)
         if (risk.id_risk === id) {
           return {
             ...risk,
-            [name]: selectedOption,
+            [name]: selectedOption.toString(),
           };
         } else {
           return risk;
@@ -158,7 +158,7 @@ console.log(riskList)
                     isSearchable={false}
                     placeholder="Selecciona una opción"
                     value={impact.find(
-                      (option) => option.id === data.impact
+                      (option) => (option.id).toString() === data.impact
                     )}
                     name="impact"
                     classNamePrefix="css-1hwfws3"
@@ -177,7 +177,7 @@ console.log(riskList)
                     isSearchable={false}
                     placeholder="Selecciona una opción"
                     value={probability.find(
-                      (option) => option.id === data.probability
+                      (option) => (option.id).toString() === data.probability
                     )}
                     name="probability"
                     classNamePrefix="css-1hwfws3"
@@ -196,7 +196,7 @@ console.log(riskList)
                     isSearchable={true}
                     placeholder="Selecciona una opción"
                     value={ownersName.find(
-                      (option) => option.id === data.owner
+                      (option) => (option.id).toString() === data.owner
                     )}
                     name="owner"
                     onChange={(selectedOption) =>
@@ -223,7 +223,7 @@ console.log(riskList)
                     isSearchable={false}
                     placeholder="Selecciona una opción"
                     value={priority.find(
-                      (option) => option.id === data.priority
+                      (option) => (option.id).toString() === data.priority
                     )}
                     name="priority"
                     classNamePrefix="css-1hwfws3"

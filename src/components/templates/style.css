@@ -27,7 +27,7 @@
 }
 
 #navbar {
-  background-color: #f70071;
+  background-color: #bc3e5ce8;
   width: 100%;
   font-family: cursive;
   font-size: 20px;
@@ -35,12 +35,12 @@
 }
 
 .dropdown-menu.show {
-  background-color: #ff629e;
+  background-color: #bf205d;
 }
 
 
 #dropdown-option {
-  background-color: #ff629e;
+  background-color: #ee659a;
 }
 
 #dropdown-option:hover {
@@ -48,7 +48,7 @@
 }
 
 #button-navbar {
-  background-color: #f70071;
+  background-color: #bc3e5ce8;
 }
 
 #button-navbar:hover {
