@@ -21,7 +21,7 @@ export const Footer2 = () => {
                     <li className="nav-item"><Link className="nav-link px-2 text-muted">FAQs</Link></li>
                     <li className="nav-item"><Link className="nav-link px-2 text-muted">About</Link></li>
                 </ul>
-                <p class="text-center text-muted">&copy; 2022 Company, Inc</p>
+                <p className="text-center text-muted">&copy; 2022 Company, Inc</p>
             </footer>
         </div>
     )

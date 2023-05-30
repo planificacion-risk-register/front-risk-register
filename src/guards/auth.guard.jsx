@@ -5,7 +5,7 @@ export const AuthGuard = () => {
     const token = localStorage.getItem("token")
    
     if(token===null){
-        toastError("No tienes acceso")
+        toastError("INVALID ACCESS")
     }
     return token? <Outlet/>: <Navigate replace to={'/'}/>
 }
