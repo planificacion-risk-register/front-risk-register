@@ -20,7 +20,7 @@ export async function updateTask(plan) {
         });
 }
 
-export function getPlans() {
+/*export function getPlans() {
     const options = {
         method: "GET",
         withCredentials: false,
@@ -35,6 +35,10 @@ export function getPlans() {
         .catch(function (error) {
             console.error(error);
         });
+}*/
+
+export async function getPlans(){
+    return await axios.get(url)
 }
 
 export function getPlanById(id) {

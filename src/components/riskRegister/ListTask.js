@@ -25,7 +25,7 @@ export function ListTask() {
 
   useEffect(() => {
     getPlans().then((plan) => {
-      const formattedTasks = plan.map((task) => {
+      const formattedTasks =  plan.data.map((task) => {
         const formattedStartDate = new Date(task.last_update)
           .toISOString()
           .substring(0, 10);
@@ -35,7 +35,8 @@ export function ListTask() {
         };
       });
       setPlans(formattedTasks);
-    });
+    }).catch((error)=> {
+  })  ;
   }, []);
 //cambiarlo pro la lista tarida del back
   const projectsName = [
@@ -46,6 +47,22 @@ export function ListTask() {
     { id: 5, label: "Project 404" },
   ];
 
+  const setDateList  = async () => {
+
+    getPlans().then((plan) => {
+      const formattedTasks =  plan.map((task) => {
+        const formattedStartDate = new Date(task.last_update)
+          .toISOString()
+          .substring(0, 10);
+        return {
+          ...task,
+          last_update: formattedStartDate,
+        };
+      });
+      setPlans(formattedTasks);
+    }).catch((error)=> {
+  })  ;
+  }
 
   const deleteP = (id) => {
     swal({

@@ -1,11 +1,15 @@
-import "./styleRegister.css";
-import Table from "react-bootstrap/Table";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faTrash,
+  faArrowRight,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import swal from "sweetalert";
+import Table from "react-bootstrap/Table";
+import "./styleRegister.css";
 
 const TableRisk = ({
   riskList,
@@ -14,13 +18,15 @@ const TableRisk = ({
   deletedRisks,
   setDeleted,
   ownersName,
-  impact, 
-  probability
+  impact,
+  probability,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   useEffect(() => {
     addRow();
   }, []);
-
 
   const priority = [
     { id: "1", label: "1" },
@@ -30,7 +36,6 @@ const TableRisk = ({
     { id: "5", label: "5" },
   ];
 
-console.log(riskList)
   const addRow = () => {
     const lastRisk = riskList[riskList.length - 1];
     if (
@@ -49,7 +54,7 @@ console.log(riskList)
             ? riskList[riskList.length - 1].id_risk + 1
             : 1,
           risk_description: "",
-          id_plan: lastRisk ? lastRisk.id_plan : 0, 
+          id_plan: lastRisk ? lastRisk.id_plan : 0,
           impact_description: "",
           impact: "",
           probability: "",
@@ -108,13 +113,25 @@ console.log(riskList)
         text: "The action plan must have at least one risk",
         icon: "error",
       });
-      //mensaje un plan de acción al menos debe tener una línea
     }
   }
-console.log(riskList)
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = riskList.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(riskList.length / itemsPerPage);
+
+  const goToPreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
   return (
     <div>
-      {riskList.length > 0 && (
+      {currentItems.length > 0 && (
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -131,7 +148,7 @@ console.log(riskList)
             </tr>
           </thead>
           <tbody>
-            {riskList.map((data, index) => (
+            {currentItems.map((data, index) => (
               <tr key={data.id_risk}>
                 <td>{data.id_risk}</td>
                 <td>
@@ -152,13 +169,16 @@ console.log(riskList)
                     onChange={(e) => handleRiskChange(e, data.id_risk)}
                   />
                 </td>
-                <td className={`risk-${data.impact}`} style={{width: "190px"}}>
+                <td
+                  className={`risk-${data.impact}`}
+                  style={{ width: "190px" }}
+                >
                   <Select
                     options={impact}
                     isSearchable={false}
                     placeholder="Selecciona una opción"
                     value={impact.find(
-                      (option) => (option.id).toString() === data.impact
+                      (option) => option.id.toString() === data.impact
                     )}
                     name="impact"
                     classNamePrefix="css-1hwfws3"
@@ -171,13 +191,16 @@ console.log(riskList)
                     }
                   />
                 </td>
-                <td className={`risk-${data.probability}`} style={{width: "200px"}}>
+                <td
+                  className={`risk-${data.probability}`}
+                  style={{ width: "200px" }}
+                >
                   <Select
                     options={probability}
                     isSearchable={false}
                     placeholder="Selecciona una opción"
                     value={probability.find(
-                      (option) => (option.id).toString() === data.probability
+                      (option) => option.id.toString() === data.probability
                     )}
                     name="probability"
                     classNamePrefix="css-1hwfws3"
@@ -190,13 +213,13 @@ console.log(riskList)
                     }
                   />
                 </td>
-                <td style={{width: "200px"}}>
+                <td style={{ width: "200px" }}>
                   <Select
                     options={ownersName}
                     isSearchable={true}
                     placeholder="Selecciona una opción"
                     value={ownersName.find(
-                      (option) => (option.id).toString() === data.owner
+                      (option) => option.id.toString() === data.owner
                     )}
                     name="owner"
                     onChange={(selectedOption) =>
@@ -217,13 +240,16 @@ console.log(riskList)
                     onChange={(e) => handleRiskChange(e, data.id_risk)}
                   />
                 </td>
-                <td className={`risk-${data.priority}`} style={{width: "70px"}}>
+                <td
+                  className={`risk-${data.priority}`}
+                  style={{ width: "70px" }}
+                >
                   <Select
                     options={priority}
                     isSearchable={false}
                     placeholder="Selecciona una opción"
                     value={priority.find(
-                      (option) => (option.id).toString() === data.priority
+                      (option) => option.id.toString() === data.priority
                     )}
                     name="priority"
                     classNamePrefix="css-1hwfws3"
@@ -241,11 +267,11 @@ console.log(riskList)
                     className="form-control"
                     disabled
                     name="point"
-                    value={data.probability*data.impact}
-                    style={{width:"50px"}}
+                    value={data.probability * data.impact}
+                    style={{ width: "50px" }}
                   />
                 </td>
-                <td >
+                <td>
                   <button
                     className="btn"
                     onClick={() => {
@@ -260,6 +286,27 @@ console.log(riskList)
           </tbody>
         </Table>
       )}
+      <div className="pagination">
+        <button
+          style={{ border: "none" }}
+          className="btn"
+          disabled={currentPage === 1}
+          onClick={goToPreviousPage}
+        >
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+        <span className="page-info">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          style={{ border: "none" }}
+          className="btn"
+          disabled={currentPage === totalPages}
+          onClick={goToNextPage}
+        >
+          <FontAwesomeIcon icon={faArrowRight} />
+        </button>
+      </div>
       <button
         onClick={addRow}
         style={{ marginLeft: "93%", width: "88px" }}
@@ -267,8 +314,8 @@ console.log(riskList)
       >
         <FontAwesomeIcon icon={faPlus} />
       </button>
-      <br></br>
-      <br></br>
+      <br />
+      <br />
     </div>
   );
 };
