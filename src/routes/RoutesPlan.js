@@ -20,14 +20,15 @@ export default function RoutesPlan() {
       <Navbar/>
         <Routes>
             <Route path='/' element={<Login></Login>}></Route>
+            <Route path='/createUser' element={<CreateUser></CreateUser>}></Route>
+            
+            <Route element={<AuthGuard/>}>
             <Route path='/app' element={<App></App>}></Route>
             <Route path='/addRisk/:id' element={<AddRisk></AddRisk>}></Route>
             <Route path='/matrix/:id' element={<Matrix></Matrix>}></Route>
             <Route path='/list' element={<ListTask></ListTask>}></Route>
-            <Route path='/createUser' element={<CreateUser></CreateUser>}></Route>
             <Route path='/listUsers' element={<ListUsers></ListUsers>}></Route>
             <Route path='/perfil' element={<Perfil></Perfil>}></Route>
-            <Route element={<AuthGuard/>}>
               <Route path='/listPrueba' element={<ListTask></ListTask>}></Route>
             </Route>
         </Routes>
